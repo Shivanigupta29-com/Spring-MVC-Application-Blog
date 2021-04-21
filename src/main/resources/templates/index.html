@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th=“http://www.thymeleaf.org” lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head th:replace=“layout :: site-head”>
-  <title>Welcome to Spring MVC Blog</title>
+<head>
+    <title>Welcome to Spring MVC Blog</title>
 </head>
 
 <body>
 
-<header th:replace=“layout :: site-header”></header>
+<header>
+    <a href=“index.html”><img src="../public/img/site-logo.png"></a>
+    <a href="index.html" >Home</a>
+    <a href="users/login.html">Login</a>
+    <a href="users/register.html">Register</a>
+    <a href="posts/index.html" >Posts</a>
+    <a href="posts/create.html" >Create Post</a>
+    <a href="users/index.html" >Users</a>
+    <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
+        <form method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+</header>
+<aside>
+    <h2>Recent Posts</h2>
+    <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}">Work Begins on HTML5.1</a>
+</aside>
+<main id="posts">
 
-<h1>Welcome to Spring MVC</h1>
-Now is: <b th:text=“${execInfo.now.time}”>date and time</b>
+    <article th:each="p : ${latest3posts}">
+        <h2 class="title" th:text="${p.title}">Post Title</h2>
+        <div class="date">
+            <i>Posted on</i>
+            <span th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+            <span th:if="${p.author}" th:remove="tag">
+          <i>by</i>
+          <span th:text="${p.author.fullName != null ?
+                        p.author.fullName : p.author.username}">Netmeds</span>
+        </span>
+        </div>
+        <p class="content" th:utext="${p.body}">Post content</p>
+    </article>
+</main>
 
-<footer th:replace=“layout :: site-footer”></footer>
+<footer>
+    &copy; Spring MVC Blog System, 2016
+</footer>
 
 </body>
 
