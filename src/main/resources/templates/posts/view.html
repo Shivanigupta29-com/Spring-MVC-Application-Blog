@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <title th:text="${post.title}">View Post</title>
+</head>
+
+<body>
+
+<header>
+  <a href=“index.html”><img src="../public/img/site-logo.png"></a>
+  <a href="index.html" >Home</a>
+  <a href="users/login.html">Login</a>
+  <a href="users/register.html">Register</a>
+  <a href="posts/index.html" >Posts</a>
+  <a href="posts/create.html" >Create Post</a>
+  <a href="users/index.html" >Users</a>
+  <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
+    <form method="post">
+      <input type="submit" value="Logout"/>
+    </form>
+  </div>
+  <ul id="messages" th:with="notifyMessages=${session[T(blog.services
+          .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+    <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
+        th:class="${#strings.toLowerCase(msg.type)}">
+    </li>
+    <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
+          T(blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+
+  </ul>
+</header>
+<main id="posts">
+  <article>
+    <h2 class="title" th:text="${post.title}">Post Title</h2>
+    <div class="date">
+      <i>Posted on</i>
+      <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+      <span th:if="${post.author}" th:remove="tag">
+        <i>by</i>
+        <span th:text="${post.author.fullName != null ?
+                         post.author.fullName : post.author.username}">Svetlin Nakov</span>
+        </span>
+    </div>
+    <p class="content" th:utext="${post.body}">Post content</p>
+  </article>
+</main>
+
+<footer>
+  &copy; Spring MVC Blog System, 2016
+</footer>
+
+</body>
+
+</html>

@@ -40,7 +40,27 @@ body>main:after {
   display: block;
   clear: both;
 }
+.formError {
+    color: red;
+    font-style: italic;
+}
+ul#messages li {
+display: block;
+width: 80%;
+margin: 5px auto;
+text-align: center;
+padding: 5px;
+border-radius: 5px;
+}
 
+ul#messages li.info {
+background: #7f7;
+}
+
+ul#messages li.error {
+background: #d00;
+color: white;
+}
 #logged-in-info {
 float: right;
 margin-top: 18px;

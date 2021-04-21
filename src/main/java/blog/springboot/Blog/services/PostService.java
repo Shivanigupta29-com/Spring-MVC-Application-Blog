@@ -1,8 +1,7 @@
 package blog.springboot.Blog.services;
+import java.util.List;
 
 import blog.springboot.Blog.models.Post;
-
-import java.util.List;
 
 public interface PostService {
     List<Post> findAll();
@@ -12,3 +11,5 @@ public interface PostService {
     Post edit(Post post);
     void deleteById(Long id);
 }
+
+
