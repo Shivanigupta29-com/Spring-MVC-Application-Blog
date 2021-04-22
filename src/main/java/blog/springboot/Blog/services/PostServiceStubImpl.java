@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import blog.springboot.Blog.models.Post;
 import blog.springboot.Blog.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,6 +31,7 @@ public class PostServiceStubImpl implements PostService {
     public List<Post> findAll() {
         return this.posts;
     }
+
 
     @Override
     public List<Post> findLatest5() {
@@ -74,5 +77,9 @@ public class PostServiceStubImpl implements PostService {
             }
         }
         throw new RuntimeException("Post not found: " + id);
+    }
+    @Override
+    public Page<Post> findAll(Pageable pageable) {
+         return null;
     }
 }
