@@ -24,6 +24,6 @@ public class HomeController {
                 .limit(3).collect(Collectors.toList());
         model.addAttribute("latest3posts", latest3Posts);
 
-        return "index";
+        return "index   1";
     }
 }
