@@ -45,13 +45,13 @@ public class UserServiceStubImpl implements UserService {
 
     @Override
     public User findByUserName(String userName) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
     @Override
     public Page<User> findAll(Pageable pageable) {
-        // TODO Auto-generated method stub
+
         return null;
     }
 

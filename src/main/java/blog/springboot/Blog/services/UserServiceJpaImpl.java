@@ -20,8 +20,11 @@ public class UserServiceJpaImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserServiceJpaImpl(){
+        bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    }
 
     @Override
     public boolean authenticate(String userName, String password) {
