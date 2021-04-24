@@ -2,24 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8" />
+    <title>SpringBoot-Blog</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <!-- Use font awesome instead of glyphicons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <!-- Favorite icon -->
+    <link rel="icon" href="../public/img/favicon.ico" th:href="@{/img/favicon.ico}" />
+    <!-- Custom site CSS styles -->
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
+
+    <!--
+        <script src="../public/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    -->
+    <!-- Custom site scripts  -->
+    <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
 </head>
 
 <body>
 
 <header>
-    <a href=“index.html”><img src="../public/img/site-logo.png"></a>
-    <a href="index.html" >Home</a>
-    <a href="users/login.html">Login</a>
-    <a href="users/register.html">Register</a>
-    <a href="posts/index.html" >Posts</a>
-    <a href="posts/create.html" >Create Post</a>
-    <a href="users/index.html" >Users</a>
-    <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
-        <form method="post">
-            <input type="submit" value="Logout"/>
-        </form>
-    </div>
+    <header>
+        <a href=“index.html”><img src="../public/img/site-logo.png"></a>
+        <a href="index.html" >Home</a>
+        <a href="users/login.html">Login</a>
+        <a href="users/register.html">Register</a>
+        <a href="posts/index.html" >Posts</a>
+        <a href="posts/create.html" >Create Post</a>
+        <a href="users/index.html" >Users</a>
+        <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
+            <form method="post">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+    </header>
     <ul id="messages" th:with="notifyMessages=${session[T(blog.services
           .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
@@ -32,20 +60,26 @@
 </header>
 <h1>Login in the Blog</h1>
 
-<form method="post" th:object="${loginForm}">
-    <div><label for="username">Username:</label></div>
-    <input id="username" type="text" name="username" th:value="*{username}" />
-    <span class="formError" th:if="${#fields.hasErrors('username')}"
-          th:errors="*{username}">Invalid username</span>
+<div class="container row">
+    <form method="post" th:action="@{/users/login}" class="form col-md-5 col-md-offset-7">
+        <div class="form-group">
+            <label for="userName">User Name</label>
+            <input type="text" id="userName" name="userName" class="form-control"/>
+        </div><!-- User name -->
 
-    <div><label for="password" th:value="*{username}">Password:</label></div>
-    <input id="password" type="password" name="password" th:value="*{password}" />
-    <span class="formError" th:if="${#fields.hasErrors('password')}"
-          th:errors="*{password}">Invalid password</span>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="passwordHash" name="passwordHash" class="form-control"/>
+        </div><!-- Password -->
 
-    <div><input type="submit" value="Login"/>
-        <a href="register.html">[Go to Register]</a></div>
-</form>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary pull-right" value="Login"/>
+            <a href="register.html" th:href="@{/users/register}">[Go to Register]</a>
+        </div><!-- Submit Button -->
+        <div class="form-group alert alert-danger" th:if="${param.error}">Invalid Username or password</div><!-- Error message -->
+    </form>
+
+</div>
 
 <footer>
     &copy; Spring MVC Blog System, 2016

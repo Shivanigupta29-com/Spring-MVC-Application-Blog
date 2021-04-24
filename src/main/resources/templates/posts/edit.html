@@ -36,18 +36,18 @@
 
 <header>
   <header>
-  <a href=“index.html”><img src="../public/img/site-logo.png"></a>
-  <a href="index.html" >Home</a>
-  <a href="users/login.html">Login</a>
-  <a href="users/register.html">Register</a>
-  <a href="posts/index.html" >Posts</a>
-  <a href="posts/create.html" >Create Post</a>
-  <a href="users/index.html" >Users</a>
-  <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
-    <form method="post">
-      <input type="submit" value="Logout"/>
-    </form>
-  </div>
+    <a href=“index.html”><img src="../public/img/site-logo.png"></a>
+    <a href="index.html" >Home</a>
+    <a href="users/login.html">Login</a>
+    <a href="users/register.html">Register</a>
+    <a href="posts/index.html" >Posts</a>
+    <a href="posts/create.html" >Create Post</a>
+    <a href="users/index.html" >Users</a>
+    <div id="logged-in-info"> <span>Hello, <b>(user)</b></span>
+      <form method="post">
+        <input type="submit" value="Logout"/>
+      </form>
+    </div>
   </header>
   <ul id="messages" th:with="notifyMessages=${session[T(blog.services
           .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
@@ -59,21 +59,30 @@
 
   </ul>
 </header>
-<main id="posts">
-  <article>
-    <h2 class="title" th:text="${post.title}">Post Title</h2>
-    <div class="date">
-      <i>Posted on</i>
-      <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-      <span th:if="${post.author}" th:remove="tag">
-        <i>by</i>
-        <span th:text="${post.author.fullName != null ?
-                         post.author.fullName : post.author.username}">Svetlin Nakov</span>
-        </span>
-    </div>
-    <p class="content" th:utext="${post.body}">Post content</p>
-  </article>
-</main>
+<h2>Edit Post</h2>
+
+<div class="container row">
+  <form action="#" th:action="@{/posts/edit}" th:object="${post}" method="post" class="form col-md-5 col-md-offset-7">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="hidden" th:field="*{id}"/>
+      <input type="hidden" th:field="*{author}"/>
+      <input type="text" th:field="*{title}" th:class="${#fields.hasErrors('title') ? 'form-control is-invalid' : 'form-control'}" />
+      <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="invalid-feedback"></div>
+    </div><!-- Post Title -->
+    <div class="form-group">
+      <label>Content</label>
+      <textarea rows="5" cols="" th:field="*{body}" th:class="${#fields.hasErrors('body') ? 'form-control is-invalid' : 'form-control'}" ></textarea>
+      <div th:if="${#fields.hasErrors('body')}" th:errors="*{body}" class="invalid-feedback"></div>
+    </div><!-- Post Content -->
+    <div class="form-group clearfix">
+      <button type="submit" class="btn btn-primary float-right">Update Post</button>
+    </div><!-- Submit Button -->
+    <div class="form-group">
+      <div th:class="${successMessage} ? 'alert alert-success' : ''" th:text="${successMessage}"></div>
+    </div><!-- Success message -->
+  </form>
+</div>
 
 <footer>
   &copy; Spring MVC Blog System, 2016

@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@Configuration
 //@ComponentScan(basePackages = "blog.springboot.Blog")
 //@EnableAutoConfiguration
-@SpringBootApplication(scanBasePackages={"blog.springboot.Blog"})
+@SpringBootApplication
 
 public class BlogApplication {
 
