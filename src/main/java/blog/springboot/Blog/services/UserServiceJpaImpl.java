@@ -28,7 +28,6 @@ public class UserServiceJpaImpl implements UserService {
 
     @Override
     public boolean authenticate(String userName, String password) {
-        // TODO Auto-generated method stub
         return false;
     }
     @Override

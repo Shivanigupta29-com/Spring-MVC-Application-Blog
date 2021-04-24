@@ -1,5 +1,7 @@
 package blog.springboot.Blog.services;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
@@ -28,7 +30,7 @@ public class PostServiceJpaImpl implements PostService {
     }
     @Override
     public List<Post> findLatest5() {
-        // Create our own query
+
         return this.postRepository.findLatest5Posts( PageRequest.of(0,5) );
         // Using Streams also worked Descending order
         //return this.postRepository.findAll( PageRequest.of(0, 2) ).stream().sorted( (a,b) -> a.getDate().compareTo(b.getDate()) ).collect(Collectors.toList());

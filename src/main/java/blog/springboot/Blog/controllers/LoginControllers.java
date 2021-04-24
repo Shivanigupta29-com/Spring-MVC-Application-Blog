@@ -9,13 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import blog.springboot.Blog.forms.LoginForm;
 import blog.springboot.Blog.models.User;
 import blog.springboot.Blog.services.UserService;
 
-@Controller
+@RestController
 public class LoginControllers {
 
     @Autowired

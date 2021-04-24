@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import blog.springboot.Blog.models.User;
 import blog.springboot.Blog.services.UserService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class UsersControllers {
 
     @Autowired
@@ -22,9 +23,8 @@ public class UsersControllers {
 
         Page<User> users = this.userService.findAll(pageable);
 
-        // Define variables to be passed to view
-        model.addAttribute("users", users);
-        // Return the view model itself
+         model.addAttribute("users", users);
+
         return "users/index";
     }
 
